@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalentDash — Frontend Engineering Trial
 
-## Getting Started
+India's career intelligence platform. Level-based compensation data for tech professionals.
 
-First, run the development server:
+## Live URL
+https://your-vercel-url.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
+- Next.js 16 (App Router, React Server Components)
+- TypeScript (strict mode)
+- Tailwind CSS (no component libraries)
+- Mock data (55 salary records, 12 companies)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
+- `/` — Homepage
+- `/salaries` — Filterable salary table
+- `/companies/[slug]` — Company profile (12 static pages)
+- `/compare` — Side-by-side offer comparison
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to run locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repo
+   git clone https://github.com/YOUR_USERNAME/talentdash.git
+   cd talentdash
 
-## Learn More
+2. Install dependencies
+   npm install
 
-To learn more about Next.js, take a look at the following resources:
+3. Start dev server
+   npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Open http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture Decisions
 
-## Deploy on Vercel
+**Static vs Dynamic:**
+- Company pages use generateStaticParams() — pre-built at deploy time, fastest load
+- Salary table is dynamic (server-rendered per URL) — needed for filter/sort via searchParams
+- Compare page is client component — justified because it manages interactive state
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Why server components for the table:**
+The table rows render server-side. Zero client JS ships for the table itself.
+Only the filter controls (SalaryFiltersClient) are client components.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**What I would build next:**
+- Real PostgreSQL database via Neon + Prisma
+- Backend API routes (POST /api/ingest-salary, GET /api/salaries)
+- ISR revalidation after new salary submissions
