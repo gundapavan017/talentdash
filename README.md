@@ -3,7 +3,7 @@
 India's career intelligence platform. Level-based compensation data for tech professionals.
 
 ## Live URL
-https://your-vercel-url.vercel.app
+https://talentdash-virid.vercel.app/
 
 ## Tech Stack
 - Next.js 16 (App Router, React Server Components)
@@ -20,7 +20,7 @@ https://your-vercel-url.vercel.app
 ## How to run locally
 
 1. Clone the repo
-   git clone https://github.com/YOUR_USERNAME/talentdash.git
+   git clone https://github.com/gundapavan017/talentdash.git
    cd talentdash
 
 2. Install dependencies
